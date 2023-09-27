@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import {useState} from "react";
 
 import {
   Card,
@@ -9,7 +10,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {Badge} from "@/components/ui/badge";
-import {useState} from "react";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 
 interface Props {
