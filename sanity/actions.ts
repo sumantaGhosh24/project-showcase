@@ -75,6 +75,7 @@ export const getProject = async (id: string) => {
         _id,
         title,
         description,
+        githubLink,
         content,
         tags,
         'category': category->{

@@ -1,6 +1,7 @@
 import "./globals.css";
 import React from "react";
 import type {Metadata} from "next";
+import {ThemeProvider} from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Project Showcase",
@@ -21,7 +22,16 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-gray-200 font-mono">{children}</body>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="min-h-screen font-mono">{children}</div>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

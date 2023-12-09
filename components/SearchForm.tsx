@@ -35,11 +35,11 @@ const SearchForm = () => {
   }, [search]);
 
   return (
-    <form className="mx-auto mt-10 flex w-full items-center justify-center sm:-mt-10 sm:px-5">
-      <label className="relative flex w-full max-w-3xl items-center justify-center">
+    <form className="mx-auto mt-10 flex w-full items-center justify-center sm:-mt-10">
+      <label className="relative flex w-full max-w-xs items-center justify-center md:max-w-3xl">
         <Search className="absolute left-8 text-black" />
         <Input
-          className="h-fit border-0 bg-white py-6 pl-20 pr-8 text-[24px] font-normal leading-[30px] text-black !ring-0 !ring-offset-0 placeholder:text-black"
+          className="h-fit border-0 bg-white py-3 pl-20 pr-8 text-[20px] font-normal leading-[30px] text-black !ring-0 !ring-offset-0 placeholder:text-black"
           type="text"
           placeholder="Search project..."
           value={search}

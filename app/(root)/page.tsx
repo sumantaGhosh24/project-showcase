@@ -20,7 +20,7 @@ const Page = async ({searchParams}: Props) => {
 
   return (
     <>
-      <section className="bg-image relative h-[500px] bg-cover bg-center">
+      <section className="bg-image relative h-[500px]">
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="container mx-auto flex h-full items-center justify-center">
           <div className="z-10 text-center text-white">
@@ -37,7 +37,7 @@ const Page = async ({searchParams}: Props) => {
           query={searchParams?.query || ""}
           category={searchParams?.category || ""}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {projects?.length > 0 ? (
             projects.map((project: any) => (
               <ProjectCard

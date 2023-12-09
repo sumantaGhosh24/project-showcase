@@ -30,32 +30,38 @@ const ProjectCard = ({
   return (
     <Card>
       <Link href={`project/${id}`}>
-        <CardHeader>
-          <div className="mb-4">
+        <CardHeader className="p-3">
+          <div className="mb-4 overflow-hidden">
             <Image
               src={image[0].asset.url}
-              className="w-full"
+              className="w-full rounded transition-all duration-300 ease-linear hover:scale-125"
               width={384}
               height={440}
               alt={title}
             />
           </div>
-          <CardTitle>{title}</CardTitle>
+          <CardTitle className="capitalize">{title}</CardTitle>
         </CardHeader>
+        <CardContent className="p-3">
+          <CardDescription className="mb-4 first-letter:uppercase">
+            {description}
+          </CardDescription>
+          <span>
+            Category:{" "}
+            <Badge className="text-xs md:text-sm">{category.name}</Badge>
+          </span>
+          <br />
+          <br />
+          <span>
+            Tags:{" "}
+            {tags.map((tag: string) => (
+              <Badge key={tag} className="my-1 mr-1.5 text-xs md:text-sm">
+                {tag}
+              </Badge>
+            ))}
+          </span>
+        </CardContent>
       </Link>
-      <CardContent>
-        <CardDescription className="mb-4">{description}</CardDescription>
-        <span>
-          Category: <Badge className="text-base">{category.name}</Badge>
-        </span>
-        <br />
-        <br />
-        {tags.map((tag: string) => (
-          <Badge key={tag} className="mr-5 text-sm">
-            {tag}
-          </Badge>
-        ))}
-      </CardContent>
     </Card>
   );
 };

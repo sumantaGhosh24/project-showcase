@@ -39,16 +39,16 @@ const Filters = ({category}: FiltersProp) => {
   };
 
   return (
-    <ul className="no-scrollbar mt-5 flex w-full max-w-full gap-2 overflow-auto text-[16px] font-normal leading-[20px] text-black sm:max-w-2xl">
+    <ul className="no-scrollbar mt-5 flex w-full max-w-xs flex-wrap items-center justify-center gap-2 overflow-auto text-[16px] font-normal leading-[20px] sm:max-w-2xl">
       {category.map(({_id, name, slug}) => (
         <button
           key={_id}
           onClick={() => handleFilter(slug.current)}
           className={`${
             active === slug.current
-              ? "bg-blue-500 text-white"
+              ? "bg-primary text-white dark:text-black"
               : "bg-white text-black"
-          } whitespace-nowrap rounded-lg px-8 py-2.5 capitalize`}
+          } whitespace-nowrap rounded-lg px-4 py-1.5 capitalize`}
         >
           {name}
         </button>

@@ -15,6 +15,11 @@ const schema = {
       type: "text",
     },
     {
+      name: "githubLink",
+      title: "Github Link",
+      type: "url",
+    },
+    {
       name: "content",
       title: "Content",
       type: "text",
