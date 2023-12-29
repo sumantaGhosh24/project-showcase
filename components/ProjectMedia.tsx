@@ -47,7 +47,7 @@ const ProjectMedia = memo(({image, video}: Props) => {
   }));
 
   const videos = video.map((item) => ({
-    type: "video",
+    type: "video" as const,
     width: 1280,
     height: 720,
     poster: image[0].asset.url,
