@@ -115,7 +115,7 @@ const ProjectDetailed = ({
           {title}
         </h2>
         <h3 className="mb-4 text-base">{description}</h3>
-        <PortableText value={content} components={customizeComponent} />
+        <PortableText value={content} components={customizeComponent as any} />
         <p className="my-4 flex max-w-fit items-center rounded-md bg-primary-foreground p-2">
           <Github />
           <span className="mx-3 font-extrabold">
@@ -191,7 +191,7 @@ const ProjectDetailed = ({
                 <h3 className="mb-4 text-base">{page.description}</h3>
                 <PortableText
                   value={page.content}
-                  components={customizeComponent}
+                  components={customizeComponent as any}
                 />
               </div>
               <ProjectMedia image={page.image} video={page.video} />
