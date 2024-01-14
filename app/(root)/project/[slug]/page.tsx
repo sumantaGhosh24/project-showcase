@@ -12,6 +12,7 @@ const Page = async ({params}: {params: {slug: string}}) => {
         title={project.title}
         description={project.description}
         githubLink={project.githubLink}
+        liveLink={project.liveLink}
         content={project.content}
         category={project.category}
         tags={project.tags}

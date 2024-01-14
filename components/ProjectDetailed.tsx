@@ -1,16 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import {Github, ExternalLink, ClipboardCopy} from "lucide-react";
+import {Github, ExternalLink, ClipboardCopy, Eye} from "lucide-react";
+import {PortableText} from "@portabletext/react";
 
 import {Badge} from "@/components/ui/badge";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
+
 import ProjectMedia from "./ProjectMedia";
 
 interface Props {
   title: string;
   description: string;
   githubLink: string;
+  liveLink?: string;
   content: any;
   category: any;
   tags: string[];
@@ -19,10 +22,78 @@ interface Props {
   pages: any[];
 }
 
+const customizeComponent = {
+  block: {
+    h1: ({children}: {children: any}) => (
+      <h1 className="mb-4 text-3xl font-bold">{children}</h1>
+    ),
+    h2: ({children}: {children: any}) => (
+      <h2 className="mb-4 text-2xl font-bold">{children}</h2>
+    ),
+    h3: ({children}: {children: any}) => (
+      <h3 className="mb-4 text-xl font-bold">{children}</h3>
+    ),
+    h4: ({children}: {children: any}) => (
+      <h4 className="mb-4 text-lg font-bold">{children}</h4>
+    ),
+    h5: ({children}: {children: any}) => (
+      <h5 className="mb-4 text-base font-bold">{children}</h5>
+    ),
+    h6: ({children}: {children: any}) => (
+      <h6 className="mb-4 text-sm font-bold">{children}</h6>
+    ),
+    blockquote: ({children}: {children: any}) => (
+      <blockquote className="mb-4 border-l-4 border-gray-500 pl-4 italic">
+        {children}
+      </blockquote>
+    ),
+  },
+  marks: {
+    link: ({children, value}: {children: any; value: any}) => {
+      const rel = !value.href.startsWith("/")
+        ? "noreferrer noopener"
+        : undefined;
+      return (
+        <a
+          href={value.href}
+          target={"_blank"}
+          rel={rel}
+          className="text-blue-500 underline"
+        >
+          {children}
+        </a>
+      );
+    },
+    strong: ({children}: {children: any}) => (
+      <strong className="font-bold">{children}</strong>
+    ),
+    em: ({children}: {children: any}) => <em className="italic">{children}</em>,
+    underline: ({children}: {children: any}) => <u>{children}</u>,
+    strikeThrough: ({children}: {children: any}) => <s>{children}</s>,
+    code: ({text}: {text: any}) => {
+      return <code className="bg-gray-200 px-1 text-black">{text}</code>;
+    },
+  },
+  list: {
+    bullet: ({children}: {children: any}) => (
+      <ul className="ml-6 list-disc">{children}</ul>
+    ),
+    number: ({children}: {children: any}) => (
+      <ol className="ml-6 list-decimal">{children}</ol>
+    ),
+  },
+  listItem: {
+    bullet: ({children}: {children: any}) => (
+      <li style={{listStyleType: "disclosure-closed"}}>{children}</li>
+    ),
+  },
+};
+
 const ProjectDetailed = ({
   title,
   description,
   githubLink,
+  liveLink,
   content,
   category,
   tags,
@@ -44,8 +115,8 @@ const ProjectDetailed = ({
           {title}
         </h2>
         <h3 className="mb-4 text-base">{description}</h3>
-        <h3 className="mb-4 text-sm text-muted-foreground">{content}</h3>
-        <p className="mb-4 flex max-w-fit items-center rounded-md bg-primary-foreground p-2">
+        <PortableText value={content} components={customizeComponent} />
+        <p className="my-4 flex max-w-fit items-center rounded-md bg-primary-foreground p-2">
           <Github />
           <span className="mx-3 font-extrabold">
             Github code repertory
@@ -58,6 +129,19 @@ const ProjectDetailed = ({
             className="ml-3 cursor-pointer"
           />
         </p>
+        {liveLink && (
+          <p className="mb-4 flex max-w-fit items-center rounded-md bg-primary-foreground p-2">
+            <Eye />
+            <span className="mx-3 font-extrabold">Live demo</span>{" "}
+            <a href={liveLink} target="_blank">
+              <ExternalLink />
+            </a>{" "}
+            <ClipboardCopy
+              onClick={() => navigator.clipboard.writeText(liveLink)}
+              className="ml-3 cursor-pointer"
+            />
+          </p>
+        )}
         <span className="mb-5 flex items-center font-bold">
           Category:{" "}
           <Badge className="ml-2 text-xs font-normal md:text-sm">
@@ -82,11 +166,11 @@ const ProjectDetailed = ({
       </div>
       <ProjectMedia image={image} video={video} />
       <h3 className="mt-5 text-xl font-bold">Pages ({pages.length})</h3>
-      <Tabs defaultValue="home" className="w-full">
-        <TabsList>
+      <Tabs defaultValue={pages[0].title} className="w-full">
+        <TabsList className="mb-3">
           {pages.map((page) => (
             <TabsTrigger key={page._id} value={page.title}>
-              {page.title}
+              {page.title.split("-")[page.title.split("-").length - 1]}
             </TabsTrigger>
           ))}
         </TabsList>
@@ -102,12 +186,13 @@ const ProjectDetailed = ({
               />
               <div>
                 <h2 className="my-5 text-2xl font-semibold capitalize leading-none tracking-tight">
-                  {page.title}
+                  {page.title.split("-")[page.title.split("-").length - 1]}
                 </h2>
                 <h3 className="mb-4 text-base">{page.description}</h3>
-                <h3 className="mb-4 text-sm text-muted-foreground">
-                  {page.content}
-                </h3>
+                <PortableText
+                  value={page.content}
+                  components={customizeComponent}
+                />
               </div>
               <ProjectMedia image={page.image} video={page.video} />
             </div>

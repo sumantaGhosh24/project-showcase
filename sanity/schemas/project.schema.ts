@@ -20,9 +20,19 @@ const schema = {
       type: "url",
     },
     {
+      name: "liveLink",
+      title: "Live Link",
+      type: "url",
+    },
+    {
       name: "content",
       title: "Content",
-      type: "text",
+      type: "array",
+      of: [
+        {
+          type: "block",
+        },
+      ],
     },
     {
       name: "tags",
