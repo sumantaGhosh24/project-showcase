@@ -84,7 +84,9 @@ const customizeComponent = {
   },
   listItem: {
     bullet: ({children}: {children: any}) => (
-      <li style={{listStyleType: "disclosure-closed"}}>{children}</li>
+      <li style={{listStyleType: "disclosure-closed"}} className="ml-[20px]">
+        {children}
+      </li>
     ),
   },
 };
@@ -106,17 +108,17 @@ const ProjectDetailed = ({
       <Image
         src={image[0].asset.url}
         alt="primary image"
-        height={100}
-        width={100}
+        height={400}
+        width={1200}
         className="h-[350px] w-full rounded object-cover"
       />
       <div>
         <h2 className="my-5 text-2xl font-semibold capitalize leading-none tracking-tight">
           {title}
         </h2>
-        <h3 className="mb-4 text-base">{description}</h3>
+        <h3 className="mb-5 text-base">{description}</h3>
         <PortableText value={content} components={customizeComponent as any} />
-        <p className="my-4 flex max-w-fit items-center rounded-md bg-primary-foreground p-2">
+        <p className="my-5 flex max-w-fit items-center rounded-md bg-primary-foreground p-2">
           <Github />
           <span className="mx-3 font-extrabold">
             Github code repertory
@@ -165,40 +167,44 @@ const ProjectDetailed = ({
         </span>
       </div>
       <ProjectMedia image={image} video={video} />
-      <h3 className="mt-5 text-xl font-bold">Pages ({pages.length})</h3>
-      <Tabs defaultValue={pages[0].title} className="w-full">
-        <TabsList className="mb-3">
-          {pages.map((page) => (
-            <TabsTrigger key={page._id} value={page.title}>
-              {page.title.split("-")[page.title.split("-").length - 1]}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-        {pages.map((page) => (
-          <TabsContent key={page._id} value={page.title}>
-            <div className="mx-auto w-full">
-              <Image
-                src={page.image[0].asset.url}
-                alt="primary image"
-                height={100}
-                width={100}
-                className="h-[350px] w-full rounded object-cover"
-              />
-              <div>
-                <h2 className="my-5 text-2xl font-semibold capitalize leading-none tracking-tight">
+      {pages?.length > 0 && (
+        <>
+          <h3 className="mt-5 text-xl font-bold">Pages ({pages.length})</h3>
+          <Tabs defaultValue={pages[0].title} className="w-full">
+            <TabsList className="mb-3">
+              {pages.map((page) => (
+                <TabsTrigger key={page._id} value={page.title}>
                   {page.title.split("-")[page.title.split("-").length - 1]}
-                </h2>
-                <h3 className="mb-4 text-base">{page.description}</h3>
-                <PortableText
-                  value={page.content}
-                  components={customizeComponent as any}
-                />
-              </div>
-              <ProjectMedia image={page.image} video={page.video} />
-            </div>
-          </TabsContent>
-        ))}
-      </Tabs>
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            {pages.map((page) => (
+              <TabsContent key={page._id} value={page.title}>
+                <div className="mx-auto w-full">
+                  <Image
+                    src={page.image[0].asset.url}
+                    alt="primary image"
+                    height={100}
+                    width={100}
+                    className="h-[350px] w-full rounded object-cover"
+                  />
+                  <div>
+                    <h2 className="my-5 text-2xl font-semibold capitalize leading-none tracking-tight">
+                      {page.title.split("-")[page.title.split("-").length - 1]}
+                    </h2>
+                    <h3 className="mb-4 text-base">{page.description}</h3>
+                    <PortableText
+                      value={page.content}
+                      components={customizeComponent as any}
+                    />
+                  </div>
+                  <ProjectMedia image={page.image} video={page.video} />
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
+        </>
+      )}
     </div>
   );
 };

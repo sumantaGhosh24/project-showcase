@@ -46,23 +46,26 @@ const ProjectMedia = memo(({image, video}: Props) => {
     ],
   }));
 
-  const videos = video.map((item) => ({
-    type: "video" as const,
-    width: 1280,
-    height: 720,
-    poster: image[0].asset.url,
-    sources: [
-      {
-        src: item,
-        type: "video/mp4",
-      },
-    ],
-  }));
+  const videos =
+    video?.length > 0
+      ? video.map((item) => ({
+          type: "video" as const,
+          width: 1280,
+          height: 720,
+          poster: image[0].asset.url,
+          sources: [
+            {
+              src: item,
+              type: "video/mp4",
+            },
+          ],
+        }))
+      : [];
 
   return (
     <>
       <h3 className="mb-2 mt-10 text-xl font-bold">
-        Images and video ({image.length + video.length})
+        Images and video ({image.length + (video?.length ?? 0)})
       </h3>
       <div className="flex items-center gap-2">
         <Image

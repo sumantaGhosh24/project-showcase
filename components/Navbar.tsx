@@ -47,9 +47,6 @@ const Navbar = () => {
                 <li className="text-primary-foreground hover:text-secondary-foreground">
                   <Link href="/">Projects</Link>
                 </li>
-                <li className="text-primary-foreground hover:text-secondary-foreground">
-                  <Link href="/about">About US</Link>
-                </li>
                 <ModeToggle />
               </ul>
             </div>
