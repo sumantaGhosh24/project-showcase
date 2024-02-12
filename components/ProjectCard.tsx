@@ -27,6 +27,11 @@ const ProjectCard = ({
   category,
   image,
 }: Props) => {
+  const TAG_MAX_COUNT = 2;
+
+  const filteredTags =
+    tags.length <= TAG_MAX_COUNT ? tags : tags.splice(0, TAG_MAX_COUNT);
+
   return (
     <Card>
       <Link href={`project/${id}`}>
@@ -34,7 +39,7 @@ const ProjectCard = ({
           <div className="mb-4 overflow-hidden">
             <Image
               src={image[0].asset.url}
-              className="w-full rounded transition-all duration-300 ease-linear hover:scale-125"
+              className="h-[200px] w-full rounded transition-all duration-300 ease-linear hover:scale-125"
               width={384}
               height={440}
               alt={title}
@@ -54,11 +59,16 @@ const ProjectCard = ({
           <br />
           <span>
             Tags:{" "}
-            {tags.map((tag: string) => (
+            {filteredTags.map((tag: string) => (
               <Badge key={tag} className="my-1 mr-1.5 text-xs md:text-sm">
                 {tag}
               </Badge>
             ))}
+            {tags.length > 0 && (
+              <Badge className="my-1 mr-1.5 text-xs md:text-sm">
+                {tags.length} +
+              </Badge>
+            )}
           </span>
         </CardContent>
       </Link>

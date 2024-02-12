@@ -184,9 +184,9 @@ const ProjectDetailed = ({
                   <Image
                     src={page.image[0].asset.url}
                     alt="primary image"
-                    height={100}
-                    width={100}
-                    className="h-[350px] w-full rounded object-cover"
+                    height={400}
+                    width={1200}
+                    className="h-[350px] w-full rounded object-contain"
                   />
                   <div>
                     <h2 className="my-5 text-2xl font-semibold capitalize leading-none tracking-tight">
