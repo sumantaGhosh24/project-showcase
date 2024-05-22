@@ -53,7 +53,7 @@ const ProjectCard = ({
           </CardDescription>
           <span>
             Category:{" "}
-            <Badge className="text-xs md:text-sm">{category.name}</Badge>
+            <Badge className="text-xs md:text-sm">{category?.name}</Badge>
           </span>
           <br />
           <br />
